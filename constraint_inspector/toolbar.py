@@ -13,10 +13,13 @@ _installed = False
 def attach():
     try:
         workbench = Gui.activeWorkbench()
-    except RuntimeError:
+    except Exception as error:
         # FreeCAD has not activated its initial workbench yet. The connected
         # workbenchActivated signal will attach the button when Sketcher opens.
-        return
+        # FreeCAD's Python binding does not consistently use RuntimeError here.
+        if str(error).strip() == 'No active workbench':
+            return
+        raise
     if workbench is None or workbench.name() != 'SketcherWorkbench':
         return
     window = Gui.getMainWindow()

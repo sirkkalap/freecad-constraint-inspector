@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
   <name>Constraint Inspector</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <date>2026-10-16</date>
   <description>Inspect Sketcher constraint references, including the origin, axes and geometry points.</description>
   <maintainer email="sirpete@iki.fi">Petri Sirkkala</maintainer>
