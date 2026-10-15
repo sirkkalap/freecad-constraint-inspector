@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: LGPL-2.1-or-later -->
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <title>Constraint Inspector</title>
+  <path d="M6 8v13h11" fill="none" stroke="#073642" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 8v13h11" fill="none" stroke="#93a1a1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="6" cy="8" r="3" fill="#2aa198" stroke="#073642" stroke-width="1.5"/>
+  <circle cx="17" cy="21" r="3" fill="#2aa198" stroke="#073642" stroke-width="1.5"/>
+  <path d="m23 17 6 8" stroke="#073642" stroke-width="7" stroke-linecap="round"/>
+  <path d="m23 17 6 8" stroke="#eee8d5" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="18" cy="11" r="8" fill="#073642" stroke="#073642" stroke-width="4"/>
+  <circle cx="18" cy="11" r="8" fill="none" stroke="#eee8d5" stroke-width="2.5"/>
+  <path d="m14 11 3 3 5-6" fill="none" stroke="#b58900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

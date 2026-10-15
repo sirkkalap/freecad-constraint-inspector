@@ -23,6 +23,10 @@ not yet been tested as an installed workbench.
 5. Switch to Sketcher and edit a sketch. The dock remains open and follows
    selected constraints. Close the dock to stop refreshing.
 
+You can also open the inspector directly from the magnifying-glass icon at the
+end of Sketcher's **Constraints** toolbar. The installed addon adds this button
+when Sketcher is activated; the separate inspector workbench is optional.
+
 To open directly during development without installation, run in FreeCAD's
 Python console (substitute the actual project path):
 
@@ -36,7 +40,11 @@ show_panel()
 ## Project structure
 
 - `InitGui.py`: workbench and menu registration.
+- `launch_inspector.py`: direct launcher, also usable through a symbolic link
+  with `runpy.run_path('/path/to/launch_inspector.py')` inside FreeCAD.
 - `constraint_inspector/commands.py`: command entry point.
+- `constraint_inspector/toolbar.py`: Sketcher Constraints toolbar integration.
+- `resources/icons/constraint-inspector.svg`: original vector command icon.
 - `constraint_inspector/panel.py`: dock, reference labels and selection tracking.
 - `constraint_inspector/i18n.py`: English UI strings and Finnish translations.
 - `constraint_inspector/references.py`: reference interpretation, independent of Qt.

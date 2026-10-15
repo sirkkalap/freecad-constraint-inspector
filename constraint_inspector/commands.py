@@ -2,12 +2,17 @@
 
 """FreeCAD command registration; import does not open the panel."""
 import FreeCADGui as Gui
+from pathlib import Path
 from .i18n import tr
+
+ICON_PATH = str(Path(__file__).resolve().parents[1] /
+                'resources' / 'icons' / 'constraint-inspector.svg')
 
 
 class ShowInspector:
     def GetResources(self):
-        return {'MenuText': tr('Constraint bindings'),
+        return {'Pixmap': ICON_PATH,
+                'MenuText': tr('Constraint bindings'),
                 'ToolTip': tr('Show all explicit sketch constraint references')}
 
     def IsActive(self):

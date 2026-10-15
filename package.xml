@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>Constraint Inspector</name>
+  <version>0.1.0</version>
+  <date>2026-10-16</date>
+  <description>Inspect Sketcher constraint references, including the origin, axes and geometry points.</description>
+  <maintainer email="sirpete@iki.fi">Petri Sirkkala</maintainer>
+  <license file="LICENSE">LGPL-2.1-or-later</license>
+  <icon>resources/icons/constraint-inspector.svg</icon>
+  <url type="repository" branch="main">https://github.com/sirkkalap/freecad-constraint-inspector</url>
+  <url type="readme">https://github.com/sirkkalap/freecad-constraint-inspector/blob/main/README.md</url>
+  <url type="bugtracker">https://github.com/sirkkalap/freecad-constraint-inspector/issues</url>
+  <freecadmin>1.1.0</freecadmin>
+  <content>
+    <workbench>
+      <name>Constraint Inspector</name>
+      <classname>ConstraintInspectorWorkbench</classname>
+      <subdirectory>./</subdirectory>
+      <icon>resources/icons/constraint-inspector.svg</icon>
+    </workbench>
+  </content>
+</package>
