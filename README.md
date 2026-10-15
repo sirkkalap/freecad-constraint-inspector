@@ -39,7 +39,8 @@ show_panel()
 
 ## Project structure
 
-- `InitGui.py`: workbench and menu registration.
+- `InitGui.py`: minimal FreeCAD startup entry point.
+- `constraint_inspector/gui.py`: workbench and menu registration.
 - `launch_inspector.py`: direct launcher, also usable through a symbolic link
   with `runpy.run_path('/path/to/launch_inspector.py')` inside FreeCAD.
 - `constraint_inspector/commands.py`: command entry point.
