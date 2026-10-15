@@ -2,12 +2,13 @@
 
 """FreeCAD command registration; import does not open the panel."""
 import FreeCADGui as Gui
+from .i18n import tr
 
 
 class ShowInspector:
     def GetResources(self):
-        return {'MenuText': 'Rajoitteiden sidonnat',
-                'ToolTip': 'Näytä luonnoksen rajoitteiden kaikki suorat viittaukset'}
+        return {'MenuText': tr('Constraint bindings'),
+                'ToolTip': tr('Show all explicit sketch constraint references')}
 
     def IsActive(self):
         return True

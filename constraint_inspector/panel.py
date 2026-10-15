@@ -10,10 +10,13 @@ import FreeCAD as App
 import FreeCADGui as Gui
 from PySide import QtCore, QtWidgets
 
+from .i18n import tr
+from .references import describe_reference
+
 
 class ConstraintInspector(QtWidgets.QDockWidget):
     def __init__(self, parent):
-        super().__init__('Rajoitteiden sidonnat', parent)
+        super().__init__(tr('Constraint bindings'), parent)
         self.setObjectName('ConstraintBindingsInspector')
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         widget = QtWidgets.QWidget()
@@ -23,17 +26,16 @@ class ConstraintInspector(QtWidgets.QDockWidget):
         layout.addWidget(self.caption)
         self.table = QtWidgets.QTableWidget(0, 5)
         self.table.setHorizontalHeaderLabels(
-            ['Rajoite', 'Tyyppi', 'Osapuoli 1', 'Osapuoli 2', 'Osapuoli 3'])
+            [tr('Constraint'), tr('Type'), tr('Reference 1'), tr('Reference 2'), tr('Reference 3')])
         self.table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.table.horizontalHeader().setSectionResizeMode(
             QtWidgets.QHeaderView.ResizeToContents)
         layout.addWidget(self.table)
         note = QtWidgets.QLabel(
-            'Valitse rajoite Sketcherissä: vastaava rivi korostuu tässä.\n'
-            'Näkyvissä ovat suorat viittaukset; muiden rajoitteiden kautta '
-            'syntyviä riippuvuuksia ei laajenneta.\n'
-            'Vie hiiri solun päälle nähdäksesi raakatunnisteet.')
+            tr('Select a constraint in Sketcher to highlight its row here.\n'
+               'Only explicit references are shown; indirect dependencies are not expanded.\n'
+               'Hover over a cell to see raw identifiers.'))
         note.setWordWrap(True)
         layout.addWidget(note)
         self.setWidget(widget)
@@ -54,30 +56,11 @@ class ConstraintInspector(QtWidgets.QDockWidget):
                 return obj
         return None
 
-    def reference(self, sketch, geo, pos):
-        if geo == -2000:
-            return '—'
-        if geo == -1 and pos == 1:
-            return 'Origo'
-        if geo in (-1, -2):
-            name = 'Vaaka-akseli (X)' if geo == -1 else 'Pystyakseli (Y)'
-        elif geo >= 0:
-            try:
-                kind = sketch.Geometry[geo].TypeId.rsplit('::', 1)[-1]
-                name = 'Edge{} ({}, ID {})'.format(geo + 1, kind, geo)
-            except (IndexError, AttributeError):
-                name = 'Geometria ID {}'.format(geo)
-        else:
-            name = 'Ulkoinen geometria ID {}'.format(geo)
-        suffix = {0: '', 1: ' / alkupiste', 2: ' / loppupiste',
-                  3: ' / keskipiste'}.get(pos, ' / piste {}'.format(pos))
-        return name + suffix
-
     def refresh(self):
         try:
             sketch = self.sketch()
             if sketch is None:
-                self.caption.setText('Avaa luonnos muokkaustilaan tai valitse luonnos.')
+                self.caption.setText(tr('Edit or select a sketch to inspect its constraints.'))
                 self.table.setRowCount(0)
                 self.signature = None
                 return
@@ -92,12 +75,12 @@ class ConstraintInspector(QtWidgets.QDockWidget):
                 rows.append((label, c.Type, refs))
             signature = (sketch.Document.Name, sketch.Name, repr(rows),
                          tuple(g.TypeId for g in sketch.Geometry))
-            self.caption.setText('{} / {} — {} rajoitetta'.format(
+            self.caption.setText(tr('{} / {} — constraints: {}').format(
                 sketch.Document.Label, sketch.Label, len(rows)))
             if signature != self.signature:
                 self.table.setRowCount(len(rows))
                 for row, (label, kind, refs) in enumerate(rows):
-                    values = [label, kind] + [self.reference(sketch, *r) for r in refs]
+                    values = [label, kind] + [describe_reference(sketch, *r, tr=tr) for r in refs]
                     for col, value in enumerate(values):
                         item = QtWidgets.QTableWidgetItem(value)
                         if col >= 2:

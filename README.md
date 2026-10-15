@@ -3,7 +3,10 @@
 A standalone Python addon for inspecting Sketcher constraint bindings. The
 read-only dock lists each constraint's type and all three explicit references,
 including the sketch origin, horizontal/vertical axes and point positions.
-The current interface is Finnish.
+The interface supports English and Finnish, following FreeCAD's language
+setting. Other languages use English. Reopen the panel after changing language;
+restart FreeCAD to refresh command menu labels. FreeCAD constraint types and
+geometry identifiers retain their original API names.
 
 ## Installation
 
@@ -15,7 +18,8 @@ not yet been tested as an installed workbench.
 2. Copy or symlink this entire project into the `Mod/ConstraintInspector`
    directory below that path. Create `Mod` if necessary.
 3. Restart FreeCAD and select the **Constraint Inspector** workbench.
-4. Choose **Constraint Inspector → Rajoitteiden sidonnat**.
+4. Choose **Constraint Inspector → Constraint bindings**
+   (Finnish: **Rajoitteiden sidonnat**).
 5. Switch to Sketcher and edit a sketch. The dock remains open and follows
    selected constraints. Close the dock to stop refreshing.
 
@@ -34,9 +38,28 @@ show_panel()
 - `InitGui.py`: workbench and menu registration.
 - `constraint_inspector/commands.py`: command entry point.
 - `constraint_inspector/panel.py`: dock, reference labels and selection tracking.
+- `constraint_inspector/i18n.py`: English UI strings and Finnish translations.
+- `constraint_inspector/references.py`: reference interpretation, independent of Qt.
+- `tests/`: standard-library unit tests.
 
-No build step or automated test suite is configured. Changes run inside
-FreeCAD, not system Python. Do not modify the user's document while inspecting.
+No build step is required. The GUI runs inside FreeCAD. Do not modify the
+user's document while inspecting.
+
+## Tests
+
+Run from the project root using system Python 3; no FreeCAD, Qt or additional
+packages are needed:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+Tests cover language selection and fallback, translation completeness and
+format placeholders, and constraint references including the origin, axes,
+arc endpoints/center, external IDs and missing geometry. FreeCAD preference
+access is simulated in the language integration test. Qt rendering, docking,
+selection synchronization and installed-workbench loading still need manual
+validation in FreeCAD.
 
 ## Scope and limitations
 
